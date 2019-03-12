@@ -1,21 +1,16 @@
 {% extends 'base.html.twig' %}
 
+{# {% form_theme form 'bootstrap_4_layout.html.twig' %} #}
+
 {% block body %}
 
     <h1>Reservez votre billet</h1>
 
     {{ form_start(formBillet) }}
 
-    <div class="form-group">
-      <label for="type">Type</label>
-        {{ form_widget(formBillet.type) }}
-    </div>
-
-    <div class="form-group">
-      
-        {{ form_widget(formBillet.fullday) }}
-
-    </div>
+    
+    {{ form_widget(formBillet) }}
+    
 
     {{ form_end(formBillet) }}
 

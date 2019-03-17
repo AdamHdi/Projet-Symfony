@@ -5,9 +5,10 @@ namespace App\Controller;
 use App\Entity\Billet;
 use App\Entity\Commande;
 use App\Form\BilletType;
+use App\Form\CommandeType;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\Common\Persistence\ObjectManager;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -36,12 +37,16 @@ class FrontController extends AbstractController
      */
     public function booking(Request $request, ObjectManager $manager)
     {
-        $billet = new Billet();
+        // $billet = new Billet();
 
-        $form = $this->createForm(BilletType::class, $billet);
+        // $form = $this->createForm(BilletType::class, $billet);
+
+        $commande = new Commande();
+
+        $form = $this->createForm(CommandeType::class, $commande);
 
         return $this->render('front/reservation.html.twig', [
-            'formBillet' => $form->createView()
+            'form' => $form->createView()
         ]);
     }
 }

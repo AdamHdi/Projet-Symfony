@@ -15,7 +15,6 @@
 
         {% for billet in form.billets %}
             <li>{{ form_row(billet.type) }}</li>
-            <li>{{ form_row(billet.date) }}</li>
             <li>{{ form_row(billet.fullday) }}</li>
             <li>{{ form_row(billet.name) }}</li>
             <li>{{ form_row(billet.country) }}</li>
@@ -24,6 +23,7 @@
 
     </ul>
     
+    <button type="submit" class="btn btn-dark">Passer la commande</button>
 
     {{ form_end(form) }}
 
@@ -85,7 +85,7 @@
         }
 
         function addTagFormDeleteLink($tagFormLi) {
-            var $removeFormButton = $('<button type="button">Delete this tag</button>');
+            var $removeFormButton = $('<button type="button">Enlever ce billet</button>');
             $tagFormLi.append($removeFormButton);
 
             $removeFormButton.on('click', function(e) {

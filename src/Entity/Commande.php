@@ -19,11 +19,6 @@ class Commande
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $BilletNumber;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $mail;
@@ -34,9 +29,14 @@ class Commande
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Billet", mappedBy="commande")
+     * @ORM\OneToMany(targetEntity="App\Entity\Billet", mappedBy="commande", cascade={"persist"})
      */
     private $billets;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $date;
 
     public function __construct()
     {
@@ -46,18 +46,6 @@ class Commande
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getBilletNumber(): ?int
-    {
-        return $this->BilletNumber;
-    }
-
-    public function setBilletNumber(int $BilletNumber): self
-    {
-        $this->BilletNumber = $BilletNumber;
-
-        return $this;
     }
 
     public function getMail(): ?string
@@ -111,6 +99,18 @@ class Commande
                 $billet->setCommande(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
 
         return $this;
     }

@@ -33,17 +33,30 @@ class FrontController extends AbstractController
     }
 
     /**
+     * @Route("/success", name="success")
+     */
+    public function booking_success()
+    {
+        return $this->render('front/success.html.twig');
+    }
+
+    /**
      * @Route("/reservation", name="reservation")
      */
     public function booking(Request $request, ObjectManager $manager)
     {
-        // $billet = new Billet();
-
-        // $form = $this->createForm(BilletType::class, $billet);
-
         $commande = new Commande();
 
         $form = $this->createForm(CommandeType::class, $commande);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($commande);
+            $manager->flush();
+
+            return $this->redirectToRoute('success');
+        }
 
         return $this->render('front/reservation.html.twig', [
             'form' => $form->createView()

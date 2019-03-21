@@ -22,11 +22,6 @@ class Billet
     private $type;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $date;
-
-    /**
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $fullday;
@@ -64,18 +59,6 @@ class Billet
     public function setType(string $type): self
     {
         $this->type = $type;
-
-        return $this;
-    }
-
-    public function getDate(): ?\DateTimeInterface
-    {
-        return $this->date;
-    }
-
-    public function setDate(\DateTimeInterface $date): self
-    {
-        $this->date = $date;
 
         return $this;
     }

@@ -25,7 +25,6 @@ class BilletType extends AbstractType
                 'Tarif reduit' => 'reduit',
             ],
          ])
-            ->add('date')
             ->add('fullday', ChoiceType::class, [
                 'choices' => [
                     'Journée complète' => true,

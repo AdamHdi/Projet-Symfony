@@ -17,6 +17,7 @@ class CommandeType extends AbstractType
             //->add('BilletNumber')
             ->add('mail')
             ->add('name')
+            ->add('date')
             ->add('billets', CollectionType::class, [
                 'entry_type' => BilletType::class,
                 'allow_add' => true,

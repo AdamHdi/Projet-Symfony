@@ -6,8 +6,9 @@ use App\Entity\Billet;
 use App\Entity\Commande;
 use App\Form\BilletType;
 use App\Form\CommandeType;
-use Symfony\Component\HttpFoundation\Request;
+use App\Service\TarifGenerator;
 
+use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,6 +34,28 @@ class FrontController extends AbstractController
     }
 
     /**
+     * @Route("/payment/{id}", name="payment")
+     */
+    public function new($id, TarifGenerator $tarifGenerator, ObjectManager $manager)
+    {
+        $repo = $this->getDoctrine()->getRepository(Commande::class);
+
+        $commande = $repo->find($id);
+
+        $tarif = $tarifGenerator->getTarif($commande);
+
+        $commande->setPrice($tarif);
+
+        $manager->persist($commande);
+        $manager->flush();
+
+        return $this->render('front/payment.html.twig', [
+            'commande' => $commande,
+            'tarif' => $tarif
+        ]);
+    }
+
+    /**
      * @Route("/success", name="success")
      */
     public function booking_success()
@@ -52,10 +75,15 @@ class FrontController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
+
+            foreach ($commande->getBillets() as $billet) {
+                $billet->setCommande($commande);
+            }
+
             $manager->persist($commande);
             $manager->flush();
 
-            return $this->redirectToRoute('success');
+            return $this->redirectToRoute('payment', ['id' => $commande->getId()]);
         }
 
         return $this->render('front/reservation.html.twig', [

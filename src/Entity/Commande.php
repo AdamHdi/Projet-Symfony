@@ -38,6 +38,11 @@ class Commande
      */
     private $date;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $price;
+
     public function __construct()
     {
         $this->billets = new ArrayCollection();
@@ -111,6 +116,18 @@ class Commande
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(?int $price): self
+    {
+        $this->price = $price;
 
         return $this;
     }

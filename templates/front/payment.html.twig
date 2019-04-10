@@ -2,7 +2,40 @@
 
 {% block body %}
 
-    <h2>Votre commande coûte :</h2>
-    {{ commande.price }}
+    <h2>Resumé de votre commande :</h2>
+
+    <h3>Votre commande comporte {{ commande.billets|length }} billets</h3>
+    {% set billetNumber = 0 %}
+    {% for billet in commande.billets %}
+        <div class="billet">
+            {% set billetNumber = billetNumber + 1 %}
+            <h3> Billet n°{{ billetNumber }}</h3>
+            <p> Type de billet : {{ billet.type }}</p>
+            {% if billet.fullday == 1 %}
+            <p>Billet journée</p>
+            {% else %}
+            <p>Billet demi-journée</p>
+            {% endif %}
+            <p>Nom : {{ billet.name }}</p>
+            <p>Pays : {{ billet.country }}</p>
+            <p>{{ billet.birthDate|date("m/d/Y") }}</p>
+        </div>
+    {% endfor %}
+
+    <div>
+        <h3>Votre commande coûte {{ commande.price }} euros</h3>
+    </div>
+
+    <form action="{{ path('success') }}" method="POST">
+    <script
+        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="pk_test_pHDMw61i90cxxPmcBt6U2bpf001bFwjD82"
+        data-amount="{{ commande.price }}00"
+        data-name="Louvres.fr"
+        data-description="Paiement de la commande"
+        data-locale="auto"
+        data-currency="eur"
+    </script>
+    </form>
 
 {% endblock %}

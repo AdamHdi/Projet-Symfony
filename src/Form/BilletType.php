@@ -10,6 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class BilletType extends AbstractType
@@ -34,7 +35,7 @@ class BilletType extends AbstractType
              ])
             ->add('name')
             ->add('country', CountryType::class)
-            ->add('birthDate')
+            ->add('birthDate', BirthdayType::class)
         ;
     }
 

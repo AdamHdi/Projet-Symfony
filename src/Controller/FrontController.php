@@ -50,16 +50,19 @@ class FrontController extends AbstractController
         $manager->flush();
 
         return $this->render('front/payment.html.twig', [
-            'commande' => $commande,
-            'tarif' => $tarif
+            'commande' => $commande
         ]);
     }
 
     /**
      * @Route("/success", name="success")
      */
-    public function booking_success()
+    public function booking_success(Request $request)
     {
+        $stripe = $stripe->handleRequest($request);
+
+        
+
         return $this->render('front/success.html.twig');
     }
 

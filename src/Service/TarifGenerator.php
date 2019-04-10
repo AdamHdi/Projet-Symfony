@@ -22,7 +22,7 @@ class TarifGenerator
         foreach ($commande->getBillets() as $billet) {
             $interval = $this->dateDifference($commande->getDate(), $billet->getBirthDate());
             if(($interval > 12) && ($interval < 65)) {
-                if ($type === 'reduit') {
+                if ($billet->getType() === 'reduit') {
                     $billet->setPrice(10);
                 } else {
                     $billet->setPrice(16);

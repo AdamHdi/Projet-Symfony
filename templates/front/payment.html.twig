@@ -26,7 +26,7 @@
         <h3>Votre commande coûte {{ commande.price }} euros</h3>
     </div>
 
-    <form action="{{ path('success') }}" method="POST">
+    <form action="{{ path('success',{'uuid':commande.uuid}) }}" method="POST">
     <script
         src="https://checkout.stripe.com/checkout.js" class="stripe-button"
         data-key="pk_test_pHDMw61i90cxxPmcBt6U2bpf001bFwjD82"

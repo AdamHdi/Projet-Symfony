@@ -55,11 +55,15 @@ class FrontController extends AbstractController
     }
 
     /**
-     * @Route("/success", name="success")
+     * @Route("/success/{uuid}", name="success")
      */
-    public function booking_success(Request $request)
+    public function booking_success($uuid, Request $request)
     {
-        $stripe = $stripe->handleRequest($request);
+        $repo = $this->getDoctrine()->getRepository(Commande::class);
+
+        $commande = $repo->find($uuid);
+
+        dump($request);
 
         
 

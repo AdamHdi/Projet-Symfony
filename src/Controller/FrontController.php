@@ -6,8 +6,9 @@ use App\Entity\Billet;
 use App\Entity\Commande;
 use App\Form\BilletType;
 use App\Form\CommandeType;
-use App\Service\TarifGenerator;
 
+use App\Service\MailGenerator;
+use App\Service\TarifGenerator;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
@@ -57,15 +58,13 @@ class FrontController extends AbstractController
     /**
      * @Route("/success/{uuid}", name="success")
      */
-    public function booking_success($uuid, Request $request)
+    public function booking_success($uuid, MailGenerator $mailGenerator, Request $request, \Swift_Mailer $mailer)
     {
         $repo = $this->getDoctrine()->getRepository(Commande::class);
 
-        $commande = $repo->find($uuid);
+        $commande = $repo->findBy(['uuid' => $uuid]);
 
-        dump($request);
-
-        
+        $mailGenerator->sendEmail($commande[0], $mailer);
 
         return $this->render('front/success.html.twig');
     }

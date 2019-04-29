@@ -7,7 +7,6 @@
     <h1>Reservez votre billet</h1>
 
     {{ form_start(form) }}
-
     
     {{ form_widget(form) }}
 
@@ -94,6 +93,14 @@
             });
         }
 
+    </script>
+
+    <script>
+
+        $('.js-datepicker').datepicker({
+            format:'yyyy.MM.dd'
+        });
+        
     </script>
 
 {% endblock %}

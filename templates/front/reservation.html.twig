@@ -81,6 +81,12 @@
 
             // add a delete link to the new form
             addTagFormDeleteLink($newFormLi);
+
+            $('.type-select').change(function(value) {
+                if(value.currentTarget.value === "reduit") {
+                    $('.type-select').after("<span>Un justificatif est nécessaire pour ce billet</span>")
+                };
+            });
         }
 
         function addTagFormDeleteLink($tagFormLi) {
@@ -96,11 +102,50 @@
     </script>
 
     <script>
+        {# (function($){
+        $.fn.datepicker.dates['fr'] = {
+        days: ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"],
+        daysShort: ["dim.", "lun.", "mar.", "mer.", "jeu.", "ven.", "sam."],
+        daysMin: ["d", "l", "ma", "me", "j", "v", "s"],
+        months: ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"],
+        monthsShort: ["janv.", "févr.", "mars", "avril", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."],
+        today: "Aujourd'hui",
+        monthsTitle: "Mois",
+        clear: "Effacer",
+        weekStart: 1,
+        format: "dd/mm/yyyy"
+        };
+        }(jQuery));
+
+        $('.datepicker').datepicker({
+        language: 'fr',
+        autoclose: true,
+        todayHighlight: true
+        }) #}
+    </script>
+    
+    <script>
 
         $('.js-datepicker').datepicker({
-            format:'yyyy.MM.dd'
+            format: "yyyy-mm-dd",
+            autoclose: true,
+            startDate: "today",
+            daysOfWeekDisabled: '2',
+            datesDisabled: ['01-05-2020'],
+            datesDisabled: ['01-11-2019'],
+            datesDisabled: ['25-12-2019'],
+            language: 'fr'
         });
-        
+        // faire une requete jquerry qui va parser la reponse en json
+        $('.js-datepicker').change(function(value) {
+            console.log(value.currentTarget.value);
+            $.get("/check-date/" + value.currentTarget.value, function(data, status){
+                console.log(data, status);
+                $('#commande_date').after("<span> Il reste " + (1000 - data.quantity) + " places disponible pour ce jour </span>");
+            });
+        });
+
     </script>
+
 
 {% endblock %}

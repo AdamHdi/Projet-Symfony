@@ -12,6 +12,7 @@ use App\Service\TarifGenerator;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class FrontController extends AbstractController
@@ -95,6 +96,22 @@ class FrontController extends AbstractController
         return $this->render('front/reservation.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/check-date/{date}", name="check-date")
+     */
+    public function checkDate($date) 
+    {
+        $date = new \DateTime($date);
+        // Faire une requete qui compte le nombre de commande à la date "date"
+        $repo = $this->getDoctrine()->getRepository(Commande::class);
+
+        $commandes = $repo->findBy(['date' => $date]);
+
+        $commandesNumber = sizeof($commandes);
+
+        return new JsonResponse(['quantity' => $commandesNumber]);
     }
 }
 

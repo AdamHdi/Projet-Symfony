@@ -3,9 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
-        <link rel="stylesheet" href="{{asset('bootstrap/dist/css/bootstrap.min.css')}}">
-        <link rel="stylesheet" href="{{asset('bootstrap-datepicker/css/bootstrap-datepicker.min.css')}}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css">
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
@@ -30,9 +29,8 @@
             {% block body %}{% endblock %}
         </div>
         <script src="https://code.jquery.com/jquery.min.js"></script>
-        <script src="{{asset('jquery/dist/jquery.min.js')}}"></script>
-        <script src="{{asset('bootstrap/dist/js/bootstrap.min.js')}}"></script>
-        <script src="{{asset('bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

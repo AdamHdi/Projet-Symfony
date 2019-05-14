@@ -25,6 +25,7 @@ class BilletType extends AbstractType
                 'Tarif senior' => 'senior',
                 'Tarif reduit' => 'reduit',
             ],
+            'attr' => ['class' => 'type-select'],
          ])
             ->add('fullday', ChoiceType::class, [
                 'choices' => [

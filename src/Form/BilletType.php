@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
@@ -28,15 +29,22 @@ class BilletType extends AbstractType
             'attr' => ['class' => 'type-select'],
          ])
             ->add('fullday', ChoiceType::class, [
+                'label'  => 'Durée',
                 'choices' => [
                     'Journée complète' => true,
                     'Demi-jounrée' => false,
                 ],
                 'expanded' => true,
              ])
-            ->add('name')
-            ->add('country', CountryType::class)
-            ->add('birthDate', BirthdayType::class)
+            ->add('name', TextType::class, [
+                'label'  => 'Nom',
+            ])
+            ->add('country', CountryType::class, [
+                'label'  => 'Pays',
+            ])
+            ->add('birthDate', BirthdayType::class, [
+                'label'  => 'Date de naissance',
+            ])
         ;
     }
 

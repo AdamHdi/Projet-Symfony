@@ -1,7 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{# {% form_theme form 'bootstrap_4_layout.html.twig' %} #}
-
 {% block body %}
 
     <h1>Reservez votre billet</h1>
@@ -113,7 +111,6 @@
         monthsTitle: "Mois",
         clear: "Effacer",
         weekStart: 1,
-        format: "dd/mm/yyyy"
         };
         }(jQuery));
 
@@ -127,7 +124,7 @@
     <script>
 
         $('.js-datepicker').datepicker({
-            format: "yyyy-mm-dd",
+            format: "dd-mm-yyyy",
             autoclose: true,
             startDate: "today",
             daysOfWeekDisabled: '2',
@@ -141,7 +138,13 @@
             console.log(value.currentTarget.value);
             $.get("/check-date/" + value.currentTarget.value, function(data, status){
                 console.log(data, status);
-                $('#commande_date').after("<span> Il reste " + (1000 - data.quantity) + " places disponible pour ce jour </span>");
+                if ((1000 - data.quantity) <= 0) {
+                    $('.js-datepicker').datepicker({
+                        datesDisabled: ['value.currentTarget.value']
+                    });
+                    $('#commande_date').after("<span> Il ne reste aucune places disponibles pour ce jour </span>");
+                };
+                $('#commande_date').after("<span> Il reste " + (1000 - data.quantity) + " places disponibles pour ce jour </span>");
             });
         });
 

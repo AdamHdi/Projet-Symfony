@@ -7,22 +7,49 @@
     height: 94vh;
 }
 
+.success {
+    display: flex;
+    background-image:url(../image/louvre-fin.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 94vh;
+}
+
+.fond {
+    height: 94vh;
+    padding-top: 40px;
+}
+
 .container {
     margin: auto;
     background-color: lightgray;
-    opacity: 0.8;
+    opacity: 0.9;
     border-radius: 5px;
-    padding: 30px;
+    padding: 25px;
 }
 
 .presentation {
-    margin: 0 auto;
+    margin: 10px auto;
     width: 100%;
     text-align: justify;
     text-align-last: center;
 }
 
+.titre {
+    margin-bottom: 30px;
+}
+
 li {
     list-style: none;
     margin-left: 20px;
+}
+
+.card {
+    padding: 20px 30px 20px 30px;
+    margin: 20px 0;
+}
+
+.btn-light {
+    margin-bottom: 10px;
 }

@@ -2,6 +2,8 @@
 
 {% block body %}
 
+<div class="container resa">
+
     <h1>Reservez votre billet</h1>
 
     {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
@@ -20,8 +22,9 @@
 
     </ul>
     
-
     {{ form_end(form) }}
+
+</div>
 
 {% endblock %}
 
@@ -32,7 +35,7 @@
         var $collectionHolder;
 
         // setup an "add a tag" link
-        var $addBilletButton = $('<button type="button" class="add_billet_link">Ajouter un billet</button>');
+        var $addBilletButton = $('<button type="button" class="add_billet_link btn btn-light">Ajouter un billet</button>');
         var $newLinkLi = $('<li></li>').append($addBilletButton);
 
         jQuery(document).ready(function() {
@@ -87,7 +90,7 @@
         }
 
         function addTagFormDeleteLink($tagFormLi) {
-            var $removeFormButton = $('<button type="button">Enlever ce billet</button>');
+            var $removeFormButton = $('<button type="button" class="btn btn-light">Enlever ce billet</button>');
             $tagFormLi.append($removeFormButton);
 
             $removeFormButton.on('click', function(e) {
@@ -99,7 +102,7 @@
     </script>
 
     <script>
-        {# (function($){
+        (function($){
         $.fn.datepicker.dates['fr'] = {
         days: ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"],
         daysShort: ["dim.", "lun.", "mar.", "mer.", "jeu.", "ven.", "sam."],
@@ -117,7 +120,7 @@
         language: 'fr',
         autoclose: true,
         todayHighlight: true
-        }) #}
+        })
     </script>
     
     <script>

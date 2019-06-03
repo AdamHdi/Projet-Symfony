@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class CommandeType extends AbstractType
@@ -22,8 +23,11 @@ class CommandeType extends AbstractType
             ])
             ->add('date', DateType::class, [
                 'widget' => 'single_text',
+                'format' => 'dd/mm/yyyy',
                 'html5' => false,
-                'attr' => ['class' => 'js-datepicker'],
+                'attr' => [
+                    'class' => 'js-datepicker',
+                    ],
             ])
             ->add('billets', CollectionType::class, [
                 'entry_type' => BilletType::class,
@@ -31,6 +35,7 @@ class CommandeType extends AbstractType
                 'allow_delete' => true,
                 'entry_options' => ['label' => 'Billet']
             ])
+            ->add('submit', SubmitType::class, ['label' => 'Passer la commande'])
         ;
     }
 

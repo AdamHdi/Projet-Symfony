@@ -1,3 +1,28 @@
-body {
+.home {
+    display: flex;
+    background-image:url(../image/image-louvre.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 94vh;
+}
+
+.container {
+    margin: auto;
     background-color: lightgray;
+    opacity: 0.8;
+    border-radius: 5px;
+    padding: 30px;
+}
+
+.presentation {
+    margin: 0 auto;
+    width: 100%;
+    text-align: justify;
+    text-align-last: center;
+}
+
+li {
+    list-style: none;
+    margin-left: 20px;
 }

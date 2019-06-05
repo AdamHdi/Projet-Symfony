@@ -2,27 +2,31 @@
 
 {% block body %}
 
-<div class="container resa">
+<div class="fond">
 
-    <h1>Reservez votre billet</h1>
+    <div class="container">
 
-    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-    
-    {{ form_widget(form) }}
+        <h1>Reservez votre billet</h1>
 
-    <ul class="billets" data-prototype="{{ form_widget(form.billets.vars.prototype)|e('html_attr') }}">
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        
+        {{ form_widget(form) }}
 
-        {% for billet in form.billets %}
-            <li>{{ form_row(billet.type) }}</li>
-            <li>{{ form_row(billet.fullday) }}</li>
-            <li>{{ form_row(billet.name) }}</li>
-            <li>{{ form_row(billet.country) }}</li>
-            <li>{{ form_row(billet.birthDate) }}</li>
-        {% endfor %}
+        <ul class="billets" data-prototype="{{ form_widget(form.billets.vars.prototype)|e('html_attr') }}">
 
-    </ul>
-    
-    {{ form_end(form) }}
+            {% for billet in form.billets %}
+                <li>{{ form_row(billet.type) }}</li>
+                <li>{{ form_row(billet.fullday) }}</li>
+                <li>{{ form_row(billet.name) }}</li>
+                <li>{{ form_row(billet.country) }}</li>
+                <li>{{ form_row(billet.birthDate) }}</li>
+            {% endfor %}
+
+        </ul>
+        
+        {{ form_end(form) }}
+
+    </div>
 
 </div>
 

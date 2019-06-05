@@ -67,7 +67,9 @@ class FrontController extends AbstractController
 
         $mailGenerator->sendEmail($commande[0], $mailer);
 
-        return $this->render('front/success.html.twig');
+        return $this->render('front/success.html.twig', [
+            'commande' => $commande[0]
+        ]);
     }
 
     /**

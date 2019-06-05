@@ -35,7 +35,10 @@ class CommandeType extends AbstractType
                 'allow_delete' => true,
                 'entry_options' => ['label' => 'Billet']
             ])
-            ->add('submit', SubmitType::class, ['label' => 'Passer la commande'])
+            ->add('submit', SubmitType::class, [
+                'label' => 'Passer la commande',
+                'attr' => [ 'class' => 'btn btn-dark' ]
+                ])
         ;
     }
 

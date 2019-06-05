@@ -2,44 +2,48 @@
 
 {% block body %}
 
-<div class="container resa">
+<div class="fond">
 
-    <h2>Resumé de votre commande :</h2>
+    <div class="container">
 
-    <h3>Votre commande comporte {{ commande.billets|length }} billets</h3>
-    {% set billetNumber = 0 %}
-    {% for billet in commande.billets %}
-        <div class="billet card">
-            {% set billetNumber = billetNumber + 1 %}
-            <h3> Billet n°{{ billetNumber }}</h3>
-            <p> Type de billet : {{ billet.type }}</p>
-            {% if billet.fullday == 1 %}
-            <p>Billet journée</p>
-            {% else %}
-            <p>Billet demi-journée</p>
-            {% endif %}
-            <p>Nom : {{ billet.name }}</p>
-            <p>Pays : {{ billet.country }}</p>
-            <p>{{ billet.birthDate|date("m/d/Y") }}</p>
+        <h2>Resumé de votre commande :</h2>
+
+        <h3>Votre commande comporte {{ commande.billets|length }} billets</h3>
+        {% set billetNumber = 0 %}
+        {% for billet in commande.billets %}
+            <div class="billet card">
+                {% set billetNumber = billetNumber + 1 %}
+                <h3> Billet n°{{ billetNumber }}</h3>
+                <p> Type de billet : {{ billet.type }}</p>
+                {% if billet.fullday == 1 %}
+                <p>Billet journée</p>
+                {% else %}
+                <p>Billet demi-journée</p>
+                {% endif %}
+                <p>Nom : {{ billet.name }}</p>
+                <p>Pays : {{ billet.country }}</p>
+                <p>{{ billet.birthDate|date("m/d/Y") }}</p>
+            </div>
+        {% endfor %}
+
+        <div>
+            <h3>Votre commande coûte {{ commande.price }} euros</h3>
         </div>
-    {% endfor %}
 
-    <div>
-        <h3>Votre commande coûte {{ commande.price }} euros</h3>
+        <form action="{{ path('success',{'uuid':commande.uuid}) }}" method="POST">
+        <script
+            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="pk_test_pHDMw61i90cxxPmcBt6U2bpf001bFwjD82"
+            data-amount="{{ commande.price }}00"
+            data-label="Payer"
+            data-name="Louvres.fr"
+            data-description="Paiement de la commande"
+            data-locale="auto"
+            data-currency="eur"
+        </script>
+        </form>
+
     </div>
-
-    <form action="{{ path('success',{'uuid':commande.uuid}) }}" method="POST">
-    <script
-        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-        data-key="pk_test_pHDMw61i90cxxPmcBt6U2bpf001bFwjD82"
-        data-amount="{{ commande.price }}00"
-        data-label="Payer"
-        data-name="Louvres.fr"
-        data-description="Paiement de la commande"
-        data-locale="auto"
-        data-currency="eur"
-    </script>
-    </form>
 
 </div>
 

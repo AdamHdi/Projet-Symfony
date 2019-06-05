@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 class TarifGeneratorTest extends TestCase
 {
 
-    public function testGetTarifAdult()
+    public function testGetTarifAdulte()
     {
         $commande = new Commande();
         $dateCommande = new \DateTime('2020-01-01');
@@ -28,7 +28,25 @@ class TarifGeneratorTest extends TestCase
         $this->assertSame(16, $tarif->getTarif($commande));
     }
 
-    public function testGetTarifs()
+    public function testGetTarifReduit()
+    {
+        $commande = new Commande();
+        $dateCommande = new \DateTime('2020-01-01');
+        $commande->setDate($dateCommande);
+
+        $billet = new Billet();
+        $birthDate = new \DateTime('1995-01-01');
+        $billet->setBirthDate($birthDate);
+        $billet->setType('reduit');
+        $billet->setCommande($commande);
+
+        $commande->addBillet($billet);
+        $tarif = new TarifGenerator();
+
+        $this->assertSame(10, $tarif->getTarif($commande));
+    }
+
+    public function testGetTarifEnfant()
     {
         $commande = new Commande();
         $dateCommande = new \DateTime('2020-01-01');
@@ -41,18 +59,26 @@ class TarifGeneratorTest extends TestCase
         $billet->setCommande($commande);
 
         $commande->addBillet($billet);
-
-        $billet2 = new Billet();
-        $birthDate2 = new \DateTime('1920-01-01');
-        $billet->setBirthDate($birthDate2);
-        $billet2->setType('senior');
-        $billet2->setCommande($commande);
-
-        $commande->addBillet($billet2);
-
         $tarif = new TarifGenerator();
 
-        $this->assertSame(20, $tarif->getTarif($commande));
+        $this->assertSame(8, $tarif->getTarif($commande));
     }
 
+    public function testGetTarifSenior()
+    {
+        $commande = new Commande();
+        $dateCommande = new \DateTime('2020-01-01');
+        $commande->setDate($dateCommande);
+
+        $billet = new Billet();
+        $birthDate = new \DateTime('1950-01-01');
+        $billet->setBirthDate($birthDate);
+        $billet->setType('senior');
+        $billet->setCommande($commande);
+
+        $commande->addBillet($billet);
+        $tarif = new TarifGenerator();
+
+        $this->assertSame(12, $tarif->getTarif($commande));
+    }
 }

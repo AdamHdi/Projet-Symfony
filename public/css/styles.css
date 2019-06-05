@@ -17,23 +17,28 @@
 }
 
 .fond {
-    height: 94vh;
     padding-top: 40px;
 }
 
 .container {
     margin: auto;
-    background-color: lightgray;
-    opacity: 0.9;
+    background-color: rgba(197, 194, 184, 0.9);
     border-radius: 5px;
     padding: 25px;
 }
 
 .presentation {
-    margin: 10px auto;
+    margin: 20px auto;
     width: 100%;
     text-align: justify;
     text-align-last: center;
+}
+
+.presentation p {
+    margin-left: 10px;
+    margin-right: 20px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 20px;
 }
 
 .titre {
@@ -52,4 +57,20 @@ li {
 
 .btn-light {
     margin-bottom: 10px;
+}
+
+h1, h2, h3 {
+    font-family: 'Arimo', sans-serif;
+}
+
+label, p {
+    font-family: 'Quicksand', sans-serif;
+}
+
+.base {
+    background-color: blanchedalmond;
+    background-size: cover;
+    background-repeat: repeat;
+    min-height: 100vh;
+    height: 100%;
 }

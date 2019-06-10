@@ -23,7 +23,7 @@ class CommandeType extends AbstractType
             ])
             ->add('date', DateType::class, [
                 'widget' => 'single_text',
-                'format' => 'dd/mm/yyyy',
+                'format' => 'dd-mm-yyyy',
                 'html5' => false,
                 'attr' => [
                     'class' => 'js-datepicker',

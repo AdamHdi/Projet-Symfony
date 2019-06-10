@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BilletRepository")
@@ -26,6 +27,19 @@ class Billet
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $fullday;
+
+    /**
+     * @Assert\Callback
+     */
+    public function validate(ExecutionContextInterface $context, $payload) 
+    {
+        dump($this->getFullday());
+        if ($this->getFullday() && (date('G') < 11)) {
+            $context->buildViolation('Il n\'est pas possible de reserver un billet journée après 14h')
+                ->atPath('fullday')
+                ->addViolation();
+        }
+    }
 
     /**
      * @ORM\Column(type="string", length=255)

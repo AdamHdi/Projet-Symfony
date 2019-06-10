@@ -106,7 +106,7 @@ class FrontController extends AbstractController
     public function checkDate($date) 
     {
         $date = new \DateTime($date);
-        // Faire une requete qui compte le nombre de commande à la date "date"
+        
         $repo = $this->getDoctrine()->getRepository(Commande::class);
 
         $commandes = $repo->findBy(['date' => $date]);

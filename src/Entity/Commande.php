@@ -8,12 +8,27 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CommandeRepository")
  */
 class Commande
 {
+    /**
+     * @Assert\Callback
+     */
+    public function validate(ExecutionContextInterface $context, $payload) 
+    {
+        foreach ($this->getBillets() as $billet) {
+            if ($billet->getFullday() && (date('G') > 14) && $this->getDate() === date("d-m-Y")) {
+                $context->buildViolation('Il n\'est pas possible de reserver un billet journée après 14h pour le jour même')
+                    ->atPath('date')
+                    ->addViolation();
+            }
+        }
+    }
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

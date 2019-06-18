@@ -87,10 +87,17 @@
             addTagFormDeleteLink($newFormLi);
 
             $('.type-select').change(function(value) {
-                if(value.currentTarget.value === "reduit") {
-                    $('.type-select').after("<span>Un justificatif est nécessaire pour ce billet</span>")
+                if(value.currentTarget.value === "1") {
+                    $('.type-select').after("<span class=\"justif\">Un justificatif est nécessaire pour ce billet</span>");
                 };
             });
+
+            $('.type-select').change(function(value) {
+                if(value.currentTarget.value === "0") {
+                    $('.justif').html("");
+                };
+            });
+            
         }
 
         function addTagFormDeleteLink($tagFormLi) {

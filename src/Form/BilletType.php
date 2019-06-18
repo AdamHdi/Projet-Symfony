@@ -25,6 +25,7 @@ class BilletType extends AbstractType
                 'Tarif reduit' => true,
             ],
             'label'  => 'Type de billet',
+            'attr' => ['class' => 'type-select'],
          ])
             ->add('fullday', ChoiceType::class, [
                 'label'  => 'Durée',

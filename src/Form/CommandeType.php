@@ -46,6 +46,7 @@ class CommandeType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Commande::class,
+            'cascade_validation' => true,
         ]);
     }
 }

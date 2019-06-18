@@ -14,7 +14,11 @@
             <div class="billet card">
                 {% set billetNumber = billetNumber + 1 %}
                 <h3> Billet n°{{ billetNumber }}</h3>
-                <p> Type de billet : {{ billet.type }}</p>
+                {% if billet.type %}
+                <p> Type de billet : réduit </p> 
+                {% else %}
+                <p> Type de billet : normal </p>
+                {% endif %}
                 {% if billet.fullday == 1 %}
                 <p>Billet journée</p>
                 {% else %}

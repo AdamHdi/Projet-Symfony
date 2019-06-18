@@ -19,7 +19,7 @@ class TarifGeneratorTest extends TestCase
         $billet = new Billet();
         $birthDate = new \DateTime('1995-01-01');
         $billet->setBirthDate($birthDate);
-        $billet->setType('normal');
+        $billet->setType(0);
         $billet->setCommande($commande);
 
         $commande->addBillet($billet);
@@ -37,7 +37,7 @@ class TarifGeneratorTest extends TestCase
         $billet = new Billet();
         $birthDate = new \DateTime('1995-01-01');
         $billet->setBirthDate($birthDate);
-        $billet->setType('reduit');
+        $billet->setType(1);
         $billet->setCommande($commande);
 
         $commande->addBillet($billet);
@@ -55,7 +55,7 @@ class TarifGeneratorTest extends TestCase
         $billet = new Billet();
         $birthDate = new \DateTime('2010-01-01');
         $billet->setBirthDate($birthDate);
-        $billet->setType('enfant');
+        $billet->setType(0);
         $billet->setCommande($commande);
 
         $commande->addBillet($billet);
@@ -73,7 +73,7 @@ class TarifGeneratorTest extends TestCase
         $billet = new Billet();
         $birthDate = new \DateTime('1950-01-01');
         $billet->setBirthDate($birthDate);
-        $billet->setType('senior');
+        $billet->setType(0);
         $billet->setCommande($commande);
 
         $commande->addBillet($billet);

@@ -21,12 +21,10 @@ class BilletType extends AbstractType
         $builder
         ->add('type', ChoiceType::class, [
             'choices'  => [
-                'Tarif normal' => 'normal',
-                'Tarif enfant' => 'enfant',
-                'Tarif senior' => 'senior',
-                'Tarif reduit' => 'reduit',
+                'Tarif normal' => false,
+                'Tarif reduit' => true,
             ],
-            'attr' => ['class' => 'type-select'],
+            'label'  => 'Type de billet',
          ])
             ->add('fullday', ChoiceType::class, [
                 'label'  => 'Durée',

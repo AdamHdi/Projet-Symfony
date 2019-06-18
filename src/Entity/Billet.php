@@ -12,6 +12,18 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 class Billet
 {
     /**
+     * @Assert\Callback
+     */
+    public function validate(ExecutionContextInterface $context, $payload) 
+    {
+        if ($this->getFullday() && (date('G') > 11) && $commande->getDate() === date("d-m-Y")) {
+            $context->buildViolation('Il n\'est pas possible de reserver un billet journée après 14h')
+                ->atPath('fullday')
+                ->addViolation();
+        }
+    }
+
+    /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -19,7 +31,7 @@ class Billet
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="boolean")
      */
     private $type;
 
@@ -27,19 +39,6 @@ class Billet
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $fullday;
-
-    /**
-     * @Assert\Callback
-     */
-    public function validate(ExecutionContextInterface $context, $payload) 
-    {
-        dump($this->getFullday());
-        if ($this->getFullday() && (date('G') < 11)) {
-            $context->buildViolation('Il n\'est pas possible de reserver un billet journée après 14h')
-                ->atPath('fullday')
-                ->addViolation();
-        }
-    }
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -59,6 +58,7 @@ class Billet
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Commande", inversedBy="billets")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $commande;
 

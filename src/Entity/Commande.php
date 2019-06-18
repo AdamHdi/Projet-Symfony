@@ -44,7 +44,8 @@ class Commande
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Billet", mappedBy="commande", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Billet", mappedBy="commande", cascade={"persist", "remove"})
+     * @Assert\Valid
      */
     private $billets;
 

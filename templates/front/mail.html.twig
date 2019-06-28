@@ -14,11 +14,11 @@
             <div class="billet card">
                 {% set billetNumber = billetNumber + 1 %}
                 <h3> Billet n°{{ billetNumber }}</h3>
-                {% if billet.price === 16 %}
+                {% if billet.price == 16 %}
                 <p>Billet Adulte</p>
-                {% elseif billet.price === 12 %}
+                {% elseif billet.price == 12 %}
                 <p>Billet Senior</p>
-                {% elseif billet.price === 8 %}
+                {% elseif billet.price == 8 %}
                 <p>Billet Enfant</p>
                 {% endif %}
                 {% if billet.type %}

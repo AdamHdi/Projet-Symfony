@@ -1,48 +1,101 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Musée du Louvre</title>
 
-{% block body %}
+    <style>
 
-<div class="fond">
+    
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i&display=swap');
 
-    <div class="container">
+    body {
+        font-family: 'Montserrat', sans-serif;
+    }
 
-        <h2>Resumé de votre commande {{ commande.uuid }} :</h2>
+    .base {
+        display: flex;
+        background-color: blanchedalmond;
+        background-size: cover;
+        background-repeat: repeat;
+        min-height: 94vh;
+        height: 100%;
+    }
 
-        <h3>Votre commande comporte {{ commande.billets|length }} billets</h3>
-        {% set billetNumber = 0 %}
-        {% for billet in commande.billets %}
-            <div class="billet card">
-                {% set billetNumber = billetNumber + 1 %}
-                <h3> Billet n°{{ billetNumber }}</h3>
-                {% if billet.price == 16 %}
-                <p>Billet Adulte</p>
-                {% elseif billet.price == 12 %}
-                <p>Billet Senior</p>
-                {% elseif billet.price == 8 %}
-                <p>Billet Enfant</p>
-                {% endif %}
-                {% if billet.type %}
-                <p> Type de billet : réduit </p> 
-                {% else %}
-                <p> Type de billet : normal </p>
-                {% endif %}
-                {% if billet.fullday == 1 %}
-                <p>Billet journée</p>
-                {% else %}
-                <p>Billet demi-journée</p>
-                {% endif %}
-                <p>Nom : {{ billet.name }}</p>
-                <p>Pays : {{ billet.country }}</p>
-                <p>Date de naissance : {{ billet.birthDate|date("m/d/Y") }}</p>
+    .fond {
+        margin: auto;
+        width: 100%;
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
+    .container {
+        margin: auto;
+        background-color: rgba(197, 194, 184, 0.9);
+        border-radius: 5px;
+        padding: 25px;
+    }
+
+    .card {
+        padding: 20px 30px 20px 30px;
+        margin: 20px;
+        border: 1px solid black;
+        background-color: white;
+    }
+    
+    </style>
+</head>
+<body>
+
+    <div class="base">
+
+    <div class="fond">
+
+        <h1 style="font-weight: 400; text-align: center;">Musée du Louvre</h1>
+
+        <div class="container">
+
+            <h2 style="font-weight: 700;">Resumé de votre commande {{ commande.uuid }} :</h2>
+
+            <h3 style="font-weight: 600;">Votre commande comporte {{ commande.billets|length }} billets</h3>
+            {% set billetNumber = 0 %}
+            {% for billet in commande.billets %}
+                <div class="billet card">
+                    {% set billetNumber = billetNumber + 1 %}
+                    <h3 style="font-weight: 600;"> Billet n°{{ billetNumber }}</h3>
+                    {% if billet.price == 16 %}
+                    <p>Billet Adulte</p>
+                    {% elseif billet.price == 12 %}
+                    <p>Billet Senior</p>
+                    {% elseif billet.price == 8 %}
+                    <p>Billet Enfant</p>
+                    {% endif %}
+                    {% if billet.type %}
+                    <p> Type de billet : réduit </p> 
+                    {% else %}
+                    <p> Type de billet : normal </p>
+                    {% endif %}
+                    {% if billet.fullday == 1 %}
+                    <p>Billet journée</p>
+                    {% else %}
+                    <p>Billet demi-journée</p>
+                    {% endif %}
+                    <p>Nom : {{ billet.name }}</p>
+                    <p>Pays : {{ billet.country }}</p>
+                    <p>Date de naissance : {{ billet.birthDate|date("m/d/Y") }}</p>
+                </div>
+            {% endfor %}
+
+            <div>
+                <h3>Votre commande coûte {{ commande.price }} euros</h3>
             </div>
-        {% endfor %}
 
-        <div>
-            <h3>Votre commande coûte {{ commande.price }} euros</h3>
         </div>
 
     </div>
 
-</div>
-
-{% endblock %}
+    </div>
+</body>
+</html>

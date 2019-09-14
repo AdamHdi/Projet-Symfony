@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use Ramsey\Uuid\UuidInterface;
 use Ramsey\Uuid\Uuid;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Ramsey\Uuid\UuidInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
@@ -22,11 +22,34 @@ class Commande
     {
         foreach ($this->getBillets() as $billet) {
             if ($billet->getFullday() && (date('G') > 14) && $this->getDate() === date("d-m-Y")) {
-                $context->buildViolation('Il n\'est pas possible de reserver un billet journée après 14h pour le jour même')
+                $context->buildViolation('Il n\'est pas possible de reserver un billet journée après 14h pour le jour même.')
                     ->atPath('date')
                     ->addViolation();
             }
         }
+        
+        if (date('w', $this->getDate()->getTimestamp()) == 2) {
+            $context->buildViolation('Le musée est fermé le mardi.')
+                    ->atPath('date')
+                    ->addViolation();
+        }
+
+        if (date('d-m', $this->getDate()->getTimestamp()) == "01-05" || date('d-m', $this->getDate()->getTimestamp()) == "01-11" || date('d-m', $this->getDate()->getTimestamp()) == "25-12") {
+            $context->buildViolation('Le musée est fermé les jours fériés.')
+                    ->atPath('date')
+                    ->addViolation();
+        }
+
+        // $new = new \DateTime();
+        // dump(date('w', $new->getTimestamp()));
+
+        // $reponse = $this->service->getResponse($this->getDate());
+
+        // if (($reponse > 1000) && date('w', $new->getTimestamp())) {
+        //     $context->buildViolation('Le musée n\'a plus de place.')
+        //             ->atPath('date')
+        //             ->addViolation();
+        // }
     }
 
     /**
@@ -66,6 +89,7 @@ class Commande
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\Callback({"App\Validator\Validator", "validateNumber"})
      */
     private $date;
 

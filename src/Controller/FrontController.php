@@ -7,6 +7,7 @@ use App\Entity\Commande;
 use App\Form\BilletType;
 use App\Form\CommandeType;
 
+use App\Service\CheckDate;
 use App\Service\MailGenerator;
 use App\Service\TarifGenerator;
 use Symfony\Component\HttpFoundation\Request;
@@ -75,7 +76,7 @@ class FrontController extends AbstractController
     /**
      * @Route("/reservation", name="reservation")
      */
-    public function booking(Request $request, ObjectManager $manager)
+    public function booking(Request $request, ObjectManager $manager, CheckDate $checkDate)
     {
         $commande = new Commande();
 
@@ -95,6 +96,9 @@ class FrontController extends AbstractController
             return $this->redirectToRoute('payment', ['id' => $commande->getId()]);
         }
 
+        $new = new \DateTime();
+        dump(date('w', $new->getTimestamp()));
+
         return $this->render('front/reservation.html.twig', [
             'form' => $form->createView()
         ]);
@@ -103,17 +107,24 @@ class FrontController extends AbstractController
     /**
      * @Route("/check-date/{date}", name="check-date")
      */
-    public function checkDate($date) 
+    public function checkDate($date, CheckDate $checkDate) 
     {
         $date = new \DateTime($date);
+
+        $reponse = $checkDate->getResponse($date);
         
-        $repo = $this->getDoctrine()->getRepository(Commande::class);
+        // $repo = $this->getDoctrine()->getRepository(Commande::class);
 
-        $commandes = $repo->findBy(['date' => $date]);
+        // $commandes = $repo->findBy(['date' => $date]);
 
-        $commandesNumber = sizeof($commandes);
+        // $commandesNumber = sizeof($commandes);
 
-        return new JsonResponse(['quantity' => $commandesNumber]);
+        // return new JsonResponse(['quantity' => $commandesNumber]);
+
+        return new JsonResponse(['quantity' => $reponse]);
+
+        // faire service qui prend en param la date envoyé et refaire la meme chose que ici
+        // puis appelé service dans commande et si return = 0 laissé une erreur
     }
 }
 

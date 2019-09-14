@@ -31,9 +31,10 @@ class BilletType extends AbstractType
                 'label'  => 'Durée',
                 'choices' => [
                     'Journée complète' => true,
-                    'Demi-jounrée' => false,
+                    'Demi-journée' => false,
                 ],
                 'expanded' => true,
+                'attr' => ['class' => 'time-select'],
              ])
             ->add('name', TextType::class, [
                 'label'  => 'Nom',

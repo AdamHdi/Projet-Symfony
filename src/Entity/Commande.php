@@ -9,9 +9,11 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use App\Validator as CustomValidator;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CommandeRepository")
+ * @CustomValidator\Validator
  */
 class Commande
 {
@@ -89,7 +91,6 @@ class Commande
 
     /**
      * @ORM\Column(type="datetime")
-     * @Assert\Callback({"App\Validator\Validator", "validateNumber"})
      */
     private $date;
 

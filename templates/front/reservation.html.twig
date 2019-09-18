@@ -148,6 +148,7 @@
         });
         
         $('.js-datepicker').change(function(value) {
+            $('.dispo-resulat').remove();
             const date = value.currentTarget.value;
             console.log(date);
             $.get("/check-date/" + date, function(data, status){
@@ -156,9 +157,9 @@
                     $('.js-datepicker').datepicker({
                         datesDisabled: ['value.currentTarget.value']
                     });
-                    $('#commande_date').after("<span> Il ne reste aucune places disponibles pour ce jour </span>");
+                    $('#commande_date').after("<span class='dispo-resulat'> Il ne reste aucune places disponibles pour ce jour </span>");
                 };
-                $('#commande_date').after("<span> Il reste " + (1000 - data.quantity) + " places disponibles pour ce jour </span>");
+                $('#commande_date').after("<span class='dispo-resulat'> Il reste " + (1000 - data.quantity) + " places disponibles pour ce jour </span>");
             });
         });
 

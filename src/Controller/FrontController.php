@@ -89,15 +89,13 @@ class FrontController extends AbstractController
             foreach ($commande->getBillets() as $billet) {
                 $billet->setCommande($commande);
             }
+            dump($request);
 
             $manager->persist($commande);
             $manager->flush();
 
             return $this->redirectToRoute('payment', ['id' => $commande->getId()]);
         }
-
-        $new = new \DateTime();
-        dump(date('w', $new->getTimestamp()));
 
         return $this->render('front/reservation.html.twig', [
             'form' => $form->createView()

@@ -8,7 +8,7 @@
 
         <h2>Resumé de votre commande :</h2>
 
-        <h3>Votre commande comporte {{ commande.billets|length }} billets</h3>
+        <h3>Votre commande comporte {{ commande.billets|length }} billets pour le {{ commande.date|date("d/m/Y") }}</h3>
         {% set billetNumber = 0 %}
         {% for billet in commande.billets %}
             <div class="billet card">
@@ -33,7 +33,7 @@
                 {% endif %}
                 <p>Nom : {{ billet.name }}</p>
                 <p>Pays : {{ billet.country }}</p>
-                <p>Date de naissance : {{ billet.birthDate|date("m/d/Y") }}</p>
+                <p>Date de naissance : {{ billet.birthDate|date("d/m/Y") }}</p>
             </div>
         {% endfor %}
 

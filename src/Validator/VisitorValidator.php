@@ -20,7 +20,7 @@ class VisitorValidator extends ConstraintValidator
 
         $reponse = $this->checkdate->getResponse($value);
 
-        if /**(*/ ($reponse > 1000) /** && (date('w', $new->getTimestamp()) == date('w', $this->getDate()->getTimestamp()))) */ {
+        if ($reponse > 1000) {
             $this->context->buildViolation($constraint->message)
                 ->setParameter('{{ value }}', $value->format('Y-m-d'))
                 ->addViolation();

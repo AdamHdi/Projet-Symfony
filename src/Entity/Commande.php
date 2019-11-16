@@ -41,16 +41,11 @@ class Commande
                     ->addViolation();
         }
 
-        // $new = new \DateTime();
-        // dump(date('w', $new->getTimestamp()));
-
-        // $reponse = $this->service->getResponse($this->getDate());
-
-        // if (($reponse > 1000) && date('w', $new->getTimestamp())) {
-        //     $context->buildViolation('Le musée n\'a plus de place.')
-        //             ->atPath('date')
-        //             ->addViolation();
-        // }
+        if ($this->getDate() < date("d-m-Y")) {
+            $context->buildViolation('Il n\'est pas possible de réserver pour les jours passés')
+                    ->atPath('date')
+                    ->addViolation();
+        }
     }
 
     /**
